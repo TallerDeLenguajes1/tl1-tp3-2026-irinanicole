@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-const int CANTIDAD = 5;
+const int TAMA = 5;
 
 void mostrar_personas(char ** personas);
 
@@ -10,7 +10,7 @@ int main ()
 {
     char * personas[5];
 
-    for (int i=0; i < CANTIDAD; i++) {
+    for (int i=0; i < TAMA; i++) {
         char cadena[50];
         printf("Ingrese el nombre de la persona %d: ",i+1);
         gets(cadena);
@@ -31,7 +31,7 @@ int main ()
 void mostrar_personas(char ** personas)
 {
     printf("[");
-    for (int i=0; i < CANTIDAD; i++)
+    for (int i=0; i < TAMA; i++)
     {
         printf("%s ; ", personas[i]);
     }
