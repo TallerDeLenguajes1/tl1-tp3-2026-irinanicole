@@ -22,20 +22,37 @@ int main ()
         strcpy(personas[i], buff);
         //puts(personas[i]);
     }
+    //
     mostrarPersonas(personas);
-    
+
     // 2do commit
     int indice;
-    printf("\nPOSICION del nombre que busca: ");
-    scanf("%d",&indice);
-    buscarNombrePorID(personas, indice);
-
-    //
-    getchar();
+    // 3er commit
     char * palabraClave;
-    printf("\nIngresar parte del nombre buscado: ");
-    gets(palabraClave);
-    buscarNombrePorPALABRA(personas, palabraClave);
+    // INTERFAZ DE USUARIO (último commit: parte3) //
+    int opcion;
+
+    printf("\n----- INTERFAZ DE USUARIO -----\n");
+    printf("\nIngrese una opcion para buscar un nombre: ");
+    scanf("%d",&opcion);
+    switch (opcion)
+    {
+        case 1:
+            printf("\nPOSICION del nombre que busca: ");
+            scanf("%d",&indice);
+            buscarNombrePorID(personas, indice);
+            break;
+        case 2:
+            getchar();
+            printf("\nIngresar parte del nombre buscado: ");
+            gets(palabraClave);
+            buscarNombrePorPALABRA(personas, palabraClave);
+            break;
+        default:
+            printf("\nLa opcion de busqueda no es valida");
+            break;
+    }
+    printf("\n\n----- FIN DEL PROGRAMA -----\n");
     
     for (int i=0; i < TAMA; i++) {
         free(personas[i]);
@@ -54,7 +71,7 @@ void mostrarPersonas(char * personas[])
             printf(", ");
         }
     }
-    printf("]");
+    printf("]\n");
 }
 // 2do commit
 void buscarNombrePorID(char * personas[], int id)
