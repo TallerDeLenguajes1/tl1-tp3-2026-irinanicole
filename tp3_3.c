@@ -26,7 +26,7 @@ typedef struct Cliente{
 } Cliente;
 
 // FUNCIONES PARA EL SISTEMA
-//float calcularCostoTotalProducto(Producto * producto);
+float calcularCostoTotalProducto(Producto producto_j); // devuelve el costo total del producto (cantidad * precioUnitario)
 
 
 int main()
@@ -99,7 +99,7 @@ int main()
             (clientes + i)->productos[j].precioUnitario = preciosTiposProductos[opcion-1];
             //
             // Calculo el costo Total del producto[j] (para un producto específico)
-            costoTotalProducto_j = (clientes + i)->productos[j].precioUnitario * (clientes + i)->productos[j].cantidad;
+            costoTotalProducto_j = calcularCostoTotalProducto((clientes+i)->productos[j]); //implemento funcion para el calculo
             //
             printf("\n******\nEl precio unitario del producto '%s' es $%f \ny la cantidad llevada es %d .\nEl costo total de este producto es : $%f\n******\n",
                 (clientes + i)->productos[j].TipoProducto,
@@ -137,9 +137,7 @@ int main()
     Esta función debe recibir como parámetro el producto y 
     devolver el resultado de calcular la Cantidad por el PrecioUnitario.
 */
-// float calcularCostoTotalProducto(Producto * producto);
-// {
-//     int i = 0;
-//     int cantidad = producto->cantidad;
-//     float precio = producto->precioUnitario;
-// }
+float calcularCostoTotalProducto(Producto producto_j)
+{
+    return (producto_j.precioUnitario * producto_j.cantidad);
+}
