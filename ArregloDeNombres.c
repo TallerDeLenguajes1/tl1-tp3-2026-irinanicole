@@ -5,6 +5,7 @@
 const int TAMA = 5;
 
 void mostrarPersonas(char * personas[]);
+void buscarNombre(char * personas[], char * sub_palabra);
 
 int main ()
 {
@@ -19,8 +20,12 @@ int main ()
         strcpy(personas[i], buff);
         //puts(personas[i]);
     }
-
     mostrarPersonas(personas);
+    //
+    char * palabraClave;
+    printf("\nIngresar parte del nombre buscado: ");
+    gets(palabraClave);
+    buscarNombre(personas, palabraClave);
     
     for (int i=0; i < TAMA; i++) {
         free(personas[i]);
@@ -40,4 +45,24 @@ void mostrarPersonas(char * personas[])
         }
     }
     printf("]");
+}
+
+void buscarNombre(char * personas[], char * sub_palabra)
+{
+    int band = 0;
+    for (int i=0; i<TAMA; i++)
+    {
+        if (strstr(personas[i],sub_palabra))
+        {
+            printf("\nPRIMER NOMBRE coincidente: ");
+            puts(personas[i]);
+            band = 1;
+            break;
+        }
+    }
+    if(!band)
+    {
+        printf("\n(-1) >> No hubo coincidencias\n");
+    }
+
 }
