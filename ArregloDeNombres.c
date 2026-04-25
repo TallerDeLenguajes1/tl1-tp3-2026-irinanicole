@@ -2,19 +2,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-const int TAMA = 5;
+//const int TAMA = 5;
 
-void mostrarPersonas(char * personas[]); //1er commit
-void buscarNombrePorID(char * personas[], int id); //2do commit
-void buscarNombrePorPALABRA(char * personas[], char * sub_palabra);
+void mostrarPersonas(char * personas[], int cantidad); //1er commit
+void buscarNombrePorID(char * personas[], int cantidad, int id); //2do commit
+void buscarNombrePorPALABRA(char * personas[], int cantidad, char * sub_palabra);
 
 int main ()
 {
     // 1er commit
-    char * personas[5];
-    char buff[50];
+    int cant_nombres;
+    char ** personas;
+    printf("\nIngrese la cantidad de nombres: ");
+    scanf("%d",&cant_nombres);
 
-    for (int i=0; i < TAMA; i++) {
+    personas = (char **)malloc(sizeof(char *) * cant_nombres);
+
+    char buff[50];
+    getchar();
+    for (int i=0; i < cant_nombres; i++) {
         printf("NOMBRE de persona %d: ",i+1);
         gets(buff);
         //
@@ -23,7 +29,7 @@ int main ()
         //puts(personas[i]);
     }
     //
-    mostrarPersonas(personas);
+    mostrarPersonas(personas, cant_nombres);
 
     // 2do commit
     int indice;
@@ -40,13 +46,13 @@ int main ()
         case 1:
             printf("\nPOSICION del nombre que busca: ");
             scanf("%d",&indice);
-            buscarNombrePorID(personas, indice);
+            buscarNombrePorID(personas, cant_nombres, indice);
             break;
         case 2:
             getchar();
             printf("\nIngresar parte del nombre buscado: ");
             gets(palabraClave);
-            buscarNombrePorPALABRA(personas, palabraClave);
+            buscarNombrePorPALABRA(personas, cant_nombres, palabraClave);
             break;
         default:
             printf("\nLa opcion de busqueda no es valida");
@@ -54,19 +60,20 @@ int main ()
     }
     printf("\n\n----- FIN DEL PROGRAMA -----\n");
     
-    for (int i=0; i < TAMA; i++) {
+    for (int i=0; i < cant_nombres; i++) {
         free(personas[i]);
     }
+    free(personas);
     getchar();
 }
 
-void mostrarPersonas(char * personas[])
+void mostrarPersonas(char * personas[], int cantidad)
 {
     printf("\nArreglo-Nombres\n[");
-    for (int i=0; i < TAMA; i++)
+    for (int i=0; i < cantidad; i++)
     {
         printf("%s", personas[i]);
-        if (i != TAMA-1)
+        if (i != cantidad-1)
         {
             printf(", ");
         }
@@ -74,9 +81,9 @@ void mostrarPersonas(char * personas[])
     printf("]\n");
 }
 // 2do commit
-void buscarNombrePorID(char * personas[], int id)
+void buscarNombrePorID(char * personas[], int cantidad, int id)
 {
-    if (TAMA >= id)
+    if (cantidad >= id)
     {
         printf("\nNombre ubicado en la posicion %d: ",id);
         puts(personas[id-1]);
@@ -87,10 +94,10 @@ void buscarNombrePorID(char * personas[], int id)
     }
 }
 
-void buscarNombrePorPALABRA(char * personas[], char * sub_palabra)
+void buscarNombrePorPALABRA(char * personas[], int cantidad, char * sub_palabra)
 {
     int band = 0;
-    for (int i=0; i<TAMA; i++)
+    for (int i=0; i<cantidad; i++)
     {
         if (strstr(personas[i],sub_palabra))
         {
