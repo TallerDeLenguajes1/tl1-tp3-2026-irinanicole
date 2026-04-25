@@ -4,36 +4,40 @@
 
 const int TAMA = 5;
 
-void mostrar_personas(char ** personas);
+void mostrarPersonas(char * personas[]);
 
 int main ()
 {
     char * personas[5];
+    char buff[50];
 
     for (int i=0; i < TAMA; i++) {
-        char cadena[50];
-        printf("Ingrese el nombre de la persona %d: ",i+1);
-        gets(cadena);
-        int longitud = strlen(cadena);
-
-        char * nombre;
-        nombre = (char *)malloc(longitud * sizeof(char) + 1); //cantidad de char que se requiere +1 ('\0' -> fin de la cadena)
-        strcpy(nombre, cadena);
-        personas[i] = nombre;
-        puts(personas[i]);
+        printf("NOMBRE de persona %d: ",i+1);
+        gets(buff);
+        //
+        personas[i] = (char *)malloc(strlen(buff) * sizeof(char) + 1); //cantidad de char que se requiere +1 ('\0' -> fin del buff)
+        strcpy(personas[i], buff);
+        //puts(personas[i]);
     }
 
-    mostrar_personas(personas);
+    mostrarPersonas(personas);
     
+    for (int i=0; i < TAMA; i++) {
+        free(personas[i]);
+    }
     getchar();
 }
 
-void mostrar_personas(char ** personas)
+void mostrarPersonas(char * personas[])
 {
-    printf("[");
+    printf("\nArreglo-Nombres\n[");
     for (int i=0; i < TAMA; i++)
     {
-        printf("%s ; ", personas[i]);
+        printf("%s", personas[i]);
+        if (i != TAMA-1)
+        {
+            printf(", ");
+        }
     }
     printf("]");
 }
