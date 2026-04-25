@@ -4,10 +4,12 @@
 
 const int TAMA = 5;
 
-void mostrarPersonas(char * personas[]);
+void mostrarPersonas(char * personas[]); //1er commit
+void buscarNombre(char * personas[], int id); //2do commit
 
 int main ()
 {
+    // 1er commit
     char * personas[5];
     char buff[50];
 
@@ -19,9 +21,14 @@ int main ()
         strcpy(personas[i], buff);
         //puts(personas[i]);
     }
-
     mostrarPersonas(personas);
     
+    // 2do commit
+    int indice;
+    printf("\nPOSICION del nombre que busca: ");
+    scanf("%d",&indice);
+    buscarNombre(personas, indice);
+
     for (int i=0; i < TAMA; i++) {
         free(personas[i]);
     }
@@ -40,4 +47,17 @@ void mostrarPersonas(char * personas[])
         }
     }
     printf("]");
+}
+// 2do commit
+void buscarNombre(char * personas[], int id)
+{
+    if (TAMA >= id)
+    {
+        printf("\nNombre ubicado en la posicion %d: ",id);
+        puts(personas[id-1]);
+    }
+    else
+    {
+        printf("\nNo se encontro el valor buscado");
+    }
 }
