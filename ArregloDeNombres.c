@@ -5,9 +5,8 @@
 const int TAMA = 5;
 
 void mostrarPersonas(char * personas[]); //1er commit
-void buscarNombre(char * personas[], int id); //2do commit
-void mostrarPersonas(char * personas[]);
-void buscarNombre(char * personas[], char * sub_palabra);
+void buscarNombrePorID(char * personas[], int id); //2do commit
+void buscarNombrePorPALABRA(char * personas[], char * sub_palabra);
 
 int main ()
 {
@@ -29,13 +28,14 @@ int main ()
     int indice;
     printf("\nPOSICION del nombre que busca: ");
     scanf("%d",&indice);
-    buscarNombre(personas, indice);
+    buscarNombrePorID(personas, indice);
 
     //
+    getchar();
     char * palabraClave;
     printf("\nIngresar parte del nombre buscado: ");
     gets(palabraClave);
-    buscarNombre(personas, palabraClave);
+    buscarNombrePorPALABRA(personas, palabraClave);
     
     for (int i=0; i < TAMA; i++) {
         free(personas[i]);
@@ -57,7 +57,7 @@ void mostrarPersonas(char * personas[])
     printf("]");
 }
 // 2do commit
-void buscarNombre(char * personas[], int id)
+void buscarNombrePorID(char * personas[], int id)
 {
     if (TAMA >= id)
     {
@@ -70,7 +70,7 @@ void buscarNombre(char * personas[], int id)
     }
 }
 
-void buscarNombre(char * personas[], char * sub_palabra)
+void buscarNombrePorPALABRA(char * personas[], char * sub_palabra)
 {
     int band = 0;
     for (int i=0; i<TAMA; i++)
