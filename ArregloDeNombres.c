@@ -31,7 +31,7 @@ int main ()
     limpiarBuffer();
     for (int i=0; i < cant_nombres; i++) {
         printf("NOMBRE de persona %d: ",i+1);
-        fgets(buff, 50, stdin);
+        fgets(buff, sizeof(buff), stdin);
         //buff[strcsnp(buff,'\n')] = '\0';
         buff[strlen(buff)-1] = '\0'; // reemplazo el 'salto de linea' ('\n') por el caracter de 'fin de cadena' ('\0')
         //
@@ -62,7 +62,7 @@ int main ()
         case 2:
             limpiarBuffer();
             printf("\nIngresar parte del nombre buscado: ");
-            fgets(palabraClave, 50, stdin);
+            fgets(palabraClave, sizeof(palabraClave), stdin);
             buscarNombrePorPALABRA(personas, cant_nombres, palabraClave);
             break;
         default:

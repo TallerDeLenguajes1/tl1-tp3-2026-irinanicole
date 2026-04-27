@@ -81,7 +81,7 @@ int main()
         
         // NOMBRE_CLIENTE
         printf("\nNOMBRE cliente %d: ", i+1);
-        fgets(Buff,50,stdin);
+        fgets(Buff,sizeof(Buff),stdin);
         Buff[strlen(Buff)-1] = '\0';
         // reservo memoria para el nombre del cliente
         clientes[i].nombreCliente = (char *) malloc(sizeof(char) * strlen(Buff));

@@ -3,8 +3,8 @@
 
 ## fgets():
 >>
-    fgets(buffer, tamaño, stdin);
-    // requiere especificar longitud ('tamaño') y el flujo de entrada ('stdin')
+    fgets(buffer, sizeof(buffer), stdin);
+    // requiere especificar longitud o tamaño ('sizeof(buffer)') y el flujo de entrada ('stdin')
 >>
 - es segura porque permite especificar el tamaño máximo del búfer para evitar desbordamientos (evita sobreescribir)
 - detiene la lectura al llegar al límite especificado.
