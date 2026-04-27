@@ -3,6 +3,13 @@
 #include <time.h>
 #include <string.h>
 
+// FUNCION PARA LIMPIAR EL BUFFER
+void limpiarBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+//
+
 // CONSTANTES
 #define N 5
 
@@ -66,15 +73,16 @@ int main()
     printf("\n-->CARGA DE CLIENTE(S)<--\n");
     int opcion;
     char Buff[50];
+    limpiarBuffer();
     for(int i = 0; i < cantidadClientes; i++)
     {
         // ID_CLIENTE
         clientes[i].clienteID = i;
         
         // NOMBRE_CLIENTE
-        getchar();
         printf("\nNOMBRE cliente %d: ", i+1);
-        gets(Buff);
+        fgets(Buff,50,stdin);
+        Buff[strlen(Buff)-1] = '\0';
         // reservo memoria para el nombre del cliente
         clientes[i].nombreCliente = (char *) malloc(sizeof(char) * strlen(Buff));
         strcpy(clientes[i].nombreCliente, Buff);
@@ -107,6 +115,7 @@ int main()
             (clientes + i)->productos[j].precioUnitario = preciosTiposProductos[opcion-1];
             //
         }
+        limpiarBuffer();
     }
     
     // llamo a la funcion mostrarVentas() e imprimo todo por pantalla

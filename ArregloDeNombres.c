@@ -3,6 +3,14 @@
 #include <string.h>
 
 //const int TAMA = 5;
+//const char *salto_de_linea = (char *)'\n'; // consultar su uso en la funcion strcsnp();
+
+// FUNCION PARA LIMPIAR EL BUFFER
+void limpiarBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+//
 
 void mostrarPersonas(char * personas[], int cantidad); //1er commit
 void buscarNombrePorID(char * personas[], int cantidad, int id); //2do commit
@@ -19,10 +27,13 @@ int main ()
     personas = (char **)malloc(sizeof(char *) * cant_nombres);
 
     char buff[50];
-    getchar();
+    // limpio el BUFFER antes de entar al bucle para seguir leyendo datos en forma de 'string'
+    limpiarBuffer();
     for (int i=0; i < cant_nombres; i++) {
         printf("NOMBRE de persona %d: ",i+1);
-        gets(buff);
+        fgets(buff, 50, stdin);
+        //buff[strcsnp(buff,'\n')] = '\0';
+        buff[strlen(buff)-1] = '\0'; // reemplazo el 'salto de linea' ('\n') por el caracter de 'fin de cadena' ('\0')
         //
         personas[i] = (char *)malloc(strlen(buff) * sizeof(char) + 1); //cantidad de char que se requiere +1 ('\0' -> fin del buff)
         strcpy(personas[i], buff);
@@ -49,9 +60,9 @@ int main ()
             buscarNombrePorID(personas, cant_nombres, indice);
             break;
         case 2:
-            getchar();
+            limpiarBuffer();
             printf("\nIngresar parte del nombre buscado: ");
-            gets(palabraClave);
+            fgets(palabraClave, 50, stdin);
             buscarNombrePorPALABRA(personas, cant_nombres, palabraClave);
             break;
         default:
@@ -65,6 +76,7 @@ int main ()
     }
     free(personas);
     getchar();
+    return 0;
 }
 
 void mostrarPersonas(char * personas[], int cantidad)
